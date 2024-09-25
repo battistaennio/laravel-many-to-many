@@ -22,7 +22,7 @@ class TypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:2|max:15'
+            'name' => 'required|unique:types,name|min:2|max:20'
         ];
     }
 
@@ -30,6 +30,7 @@ class TypeRequest extends FormRequest
     {
         return [
             'name.required' => 'Il campo Tipo è obbligatorio',
+            'name.unique' => 'Questo Tipo è già presente nel database',
             'name.min' => 'Il campo Tipo deve contenere almeno :min caratteri',
             'name.max' => 'Il campo Tipo deve contenere almeno :max caratteri'
         ];
