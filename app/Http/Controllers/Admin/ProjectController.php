@@ -6,6 +6,7 @@ use App\Functions\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,10 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+
+        $techs = Technology::all();
+
+        return view('admin.projects.create', compact('types', 'techs'));
     }
 
     /**
@@ -39,6 +43,10 @@ class ProjectController extends Controller
         $data['slug'] = Helper::generateSlug($data['name'], Project::class);
 
         $new_project = Project::create($data);
+
+        if (array_key_exists('techs', $data)) {
+            $new_project->technologies()->attach($data['techs']);
+        }
 
         return redirect(route('admin.projects.show', $new_project))->with('create_confirm', 'Progetto aggiunto correttamente!');
     }

@@ -49,6 +49,22 @@
         </div>
 
         <div class="mb-3">
+            <label for="technologies" class="form-label d-block">Tecnologia utilizzata:</label>
+
+            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+
+                @foreach ($techs as $tech)
+                    <input value="{{ $tech->id }}" name="techs[]" type="checkbox" class="btn-check"
+                        id="tech-{{ $tech->id }}" autocomplete="off">
+
+                    <label class="btn btn-outline-primary" for="tech-{{ $tech->id }}">{{ $tech->name }}</label>
+                @endforeach
+
+            </div>
+
+        </div>
+
+        <div class="mb-3">
             <label for="repo_link" class="form-label">Link repository</label>
 
             <div class="input-group">

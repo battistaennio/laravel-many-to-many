@@ -36,15 +36,29 @@
         </div>
 
         <div class="col-6">
-            <h3>Progetto di tipo:</h3>
-            <h5>{{ $project->type ? $project->type->name : 'tipo non disponibile' }}</h5>
+            <h3>Data di inizio:</h3>
+            <h5>{{ date('d/m/Y', strtotime($project->start_date)) }}</h5>
         </div>
     </div>
 
     <div class="row my-5 text-center">
         <div class="col-6">
-            <h3>Data di inizio:</h3>
-            <h5>{{ date('d/m/Y', strtotime($project->start_date)) }}</h5>
+            <h3>Progetto di tipo:</h3>
+            <h5>{{ $project->type ? $project->type->name : 'tipo non disponibile' }}</h5>
+        </div>
+
+        <div class="col-6">
+            <h3>Tecnologia utilizzata:</h3>
+            @foreach ($project->technologies as $tech)
+                <h5>{{ $tech->name }}</h5>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="row my-5 text-center">
+        <div class="col-6">
+            <h3>Slug:</h3>
+            <h5>{{ $project->slug }}</h5>
         </div>
 
         <div class="col-6">
@@ -54,16 +68,9 @@
     </div>
 
     <div class="row my-5 text-center">
-        <h3>Descrizione:</h3>
         <div class="col">
+            <h3>Descrizione:</h3>
             <h5>{{ $project->description }}</h5>
-        </div>
-    </div>
-
-    <div class="row my-5 text-center">
-        <h3>Slug:</h3>
-        <div class="col">
-            <h5>{{ $project->slug }}</h5>
         </div>
     </div>
 
