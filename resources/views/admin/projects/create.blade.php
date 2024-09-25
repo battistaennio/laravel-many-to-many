@@ -55,7 +55,7 @@
 
                 @foreach ($techs as $tech)
                     <input value="{{ $tech->id }}" name="techs[]" type="checkbox" class="btn-check"
-                        id="tech-{{ $tech->id }}" autocomplete="off">
+                        id="tech-{{ $tech->id }}" autocomplete="off" @if (in_array($tech->id, old('techs', []))) checked @endif>
 
                     <label class="btn btn-outline-primary" for="tech-{{ $tech->id }}">{{ $tech->name }}</label>
                 @endforeach
