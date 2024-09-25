@@ -15,13 +15,21 @@
 
     @if (session('error'))
         <div class="alert alert-danger" role="alert">
-            {{ session('error') }}
+            <h4>Attenzione!</h4>
+            <span class="d-block">{{ session('error') }}</span>
         </div>
     @endif
 
     @if (session('success'))
         <div class="alert alert-success" role="alert">
             {{ session('success') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+            <h4>Attenzione!</h4>
+            <span class="d-block">{{ $errors->first() }}</span>
         </div>
     @endif
 

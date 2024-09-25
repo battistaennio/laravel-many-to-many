@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Functions\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TypeRequest;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,7 @@ class TypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TypeRequest $request)
     {
         $exists = Type::where('name', $request->name)->first();
 
