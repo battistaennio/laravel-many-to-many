@@ -1,0 +1,34 @@
+header,
+aside {
+    a {
+        text-decoration: none;
+        color: white;
+
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}
+
+ul {
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.main-wrapper {
+    height: calc(100vh - 40px);
+}
+
+aside {
+    width: 235px;
+    height: 100%;
+}
+
+#content-wrapper {
+    width: 100%;
+    overflow-y: auto;
+}
