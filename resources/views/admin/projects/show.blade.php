@@ -49,9 +49,12 @@
 
         <div class="col-6">
             <h3>Tecnologia utilizzata:</h3>
-            @foreach ($project->technologies as $tech)
+
+            @forelse ($project->technologies as $tech)
                 <h5>{{ $tech->name }}</h5>
-            @endforeach
+            @empty
+                <h5>tecnologia non disponibile</h5>
+            @endforelse
         </div>
     </div>
 

@@ -13,6 +13,8 @@
         </div>
     @endif
 
+    <h2>Modifica progetto: {{ $project->name }}</h2>
+
     <form action="{{ route('admin.projects.update', $project) }}" method="post">
         @csrf
         @method('PUT')
@@ -48,6 +50,23 @@
                     </option>
                 @endforeach
             </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="technologies" class="form-label d-block">Tecnologia utilizzata:</label>
+
+            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+
+                @foreach ($techs as $tech)
+                    <input value="{{ $tech->id }}" name="techs[]" type="checkbox" class="btn-check"
+                        id="tech-{{ $tech->id }}" autocomplete="off" @if (
+                            ($errors->any() && in_array($tech->id, old('techs', []))) ||
+                                (!$errors->any() && $project->technologies->contains($tech))) checked @endif>
+
+                    <label class="btn btn-outline-primary" for="tech-{{ $tech->id }}">{{ $tech->name }}</label>
+                @endforeach
+
+            </div>
         </div>
 
         <div class="mb-3">
