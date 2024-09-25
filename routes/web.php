@@ -3,10 +3,10 @@
 use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +34,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     //rotte CRUD
     Route::resource('projects', ProjectController::class);
     Route::resource('types', TypeController::class)->except(['show', 'edit', 'create']);
+    Route::resource('technologies', TechnologyController::class)->except(['show', 'edit', 'create']);
 });
 
 require __DIR__ . '/auth.php';
