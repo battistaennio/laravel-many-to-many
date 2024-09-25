@@ -15,6 +15,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Nome Progetto</th>
                 <th scope="col">Progetto di tipo</th>
+                <th scope="col">Tecnologie</th>
                 <th scope="col">Data di inizio</th>
                 <th scope="col">Link Repository</th>
                 <th scope="col">Tools</th>
@@ -25,7 +26,18 @@
                 <tr>
                     <th scope="row">{{ $project->id }}</th>
                     <td>{{ $project->name }}</td>
-                    <td>{{ $project->type?->name }}</td>
+                    <td>
+                        @if ($project->type)
+                            <span style="cursor: default" class="btn btn-sm btn-info">{{ $project->type?->name }}</span>
+                        @else
+                        @endif
+                    </td>
+                    <td>
+                        @forelse ($project->technologies as $tech)
+                            <span style="cursor: default" class="btn btn-sm btn-primary">{{ $tech->name }}</span>
+                        @empty
+                        @endforelse
+                    </td>
                     <td>{{ date('d/m/Y', strtotime($project->start_date)) }}</td>
                     <td><a href="{{ $project->repo_link }}">Vai alla repo</a></td>
                     <td>
