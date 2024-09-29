@@ -24,7 +24,8 @@ class ProjectRequest extends FormRequest
         return [
             'name' => 'required|min:3|max:100',
             'start_date' => 'required|date|date_format:Y-m-d',
-            'repo_link' => 'required'
+            'repo_link' => 'required',
+            'img_path' => 'image|mimes:png,jpg|max:5120'
         ];
     }
 
@@ -40,6 +41,10 @@ class ProjectRequest extends FormRequest
             'start_date.date_format' => 'Il campo "Data di inizio" deve essere del formato YYYY-MM-GG (esempio 2024-01-01)',
 
             'repo_link.required' => 'Il campo "Link Repository" è obbligatorio',
+
+            'img_path.image' => 'Il file caricato deve essere un\' immagine',
+            'img_path.mimes' => 'Il file caricato deve essere un\' immagine di tipo :values',
+            'img_path.max' => 'Il file caricato non può superare i 5 MB',
         ];
     }
 }

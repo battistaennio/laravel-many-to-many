@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -41,6 +42,13 @@ class ProjectController extends Controller
         $data = $request->all();
 
         $data['slug'] = Helper::generateSlug($data['name'], Project::class);
+
+        if (array_key_exists('img_path', $data)) {
+            $path_image = Storage::put('uploads', $data['img_path']);
+            $name_image = $request->file('img_path')->getClientOriginalName();
+            $data['img_path'] = $path_image;
+            $data['img_name'] = $name_image;
+        }
 
         $new_project = Project::create($data);
 
@@ -86,6 +94,16 @@ class ProjectController extends Controller
             $data['slug'] = Helper::generateSlug($data['type_id'], Type::class);
         }
 
+        if (array_key_exists('img_path', $data)) {
+            if ($project->path_image) {
+                Storage::delete($project->path_image);
+            }
+            $path_image = Storage::put('uploads', $data['img_path']);
+            $name_image = $request->file('img_path')->getClientOriginalName();
+            $data['img_path'] = $path_image;
+            $data['img_name'] = $name_image;
+        }
+
         $project->update($data);
 
         if (array_key_exists('techs', $data)) {
@@ -102,6 +120,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->path_image) {
+            Storage::delete($project->path_image);
+        }
+
         $project->delete();
 
         return redirect(route('admin.projects.index'))->with('delete_confirm', 'Progetto "' . $project->name . '" eliminato correttamente');

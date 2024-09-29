@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->date('start_date');
             $table->string('repo_link');
+            $table->string('img_path')->nullable();
+            $table->string('img_name')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });

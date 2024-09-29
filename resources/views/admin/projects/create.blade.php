@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.projects.store') }}" method="POST">
+    <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Nome progetto</label>
@@ -79,6 +79,13 @@
         </div>
 
         <div class="mb-3">
+            <label for="img_path" class="form-label">Immagine</label>
+            <input name="img_path" class="form-control" type="file" id="img_path" onchange="showImage(event)">
+
+            <img src="/img/no-img.png" class="thumb mt-2" id="thumb">
+        </div>
+
+        <div class="mb-3">
             <label for="description" class="form-label">Descrizione</label>
             <textarea name="description" class="form-control" id="description" placeholder="Inserisci la descrizione">{{ old('description') }}</textarea>
         </div>
@@ -90,6 +97,13 @@
         </div>
 
     </form>
+
+    <script>
+        function showImage(event) {
+            const thumb = document.getElementById('thumb');
+            thumb.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
 @endsection
 
 

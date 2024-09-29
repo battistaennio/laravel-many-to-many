@@ -25,6 +25,8 @@ class Project extends Model
         'start_date',
         'repo_link',
         'description',
-        'type_id'
+        'type_id',
+        'img_path',
+        'img_name'
     ];
 }

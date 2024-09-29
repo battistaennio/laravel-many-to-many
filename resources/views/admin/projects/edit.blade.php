@@ -15,7 +15,7 @@
 
     <h2>Modifica progetto: {{ $project->name }}</h2>
 
-    <form action="{{ route('admin.projects.update', $project) }}" method="post">
+    <form action="{{ route('admin.projects.update', $project) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -84,6 +84,21 @@
         </div>
 
         <div class="mb-3">
+            <label for="img_path" class="form-label input-group">Immagine</label>
+
+            <div class="input-group">
+                <input id="img_path" name="img_path" class="form-control" type="file" onchange="ShowImage(event)">
+            </div>
+            @error('img_path')
+                <small class="text-danger">*{{ $message }}</small>
+            @enderror
+
+            <img src="{{ asset('storage/' . $project->img_path) }}" alt="" onerror="this.src='/img/no-image.png'">
+
+        </div>
+
+
+        <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea name="description" class="form-control" id="description" placeholder="add description">{{ old('description', $project->description) }}</textarea>
         </div>
@@ -95,4 +110,12 @@
         </div>
 
     </form>
+
+    <script>
+        function showImage(event) {
+            const thumb = document.getElementById('thumb');
+            thumb.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+
 @endsection

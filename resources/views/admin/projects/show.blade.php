@@ -77,6 +77,16 @@
         </div>
     </div>
 
+
+    <div class="row my-5 text-center">
+        <div class="col">
+            <h3>Immagine:</h3>
+            <img src="{{ asset('storage/' . $project->img_path) }}" alt="{{ $project->img_name }}"
+                onerror="this.src='/img/no-img.png'">
+        </div>
+    </div>
+
+
     <div class="col my-5 text-center">
         <a class="btn btn-warning" href="{{ route('admin.projects.index') }}">Torna alla lista</a>
     </div>
